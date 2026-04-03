@@ -21,3 +21,33 @@ body {
   font-family: var(--font-sans);
   @apply bg-forest-950 text-forest-100 antialiased;
 }
+
+@keyframes hero-shift {
+  0%,
+  100% {
+    transform: translate(0%, 0%) scale(1);
+    opacity: 0.16;
+  }
+  33% {
+    transform: translate(3%, -2%) scale(1.04);
+    opacity: 0.22;
+  }
+  66% {
+    transform: translate(-2%, 2%) scale(1.02);
+    opacity: 0.18;
+  }
+}
+
+.hero-aurora {
+  background-image:
+    radial-gradient(circle at 20% 20%, #c9a227 0%, transparent 45%),
+    radial-gradient(circle at 80% 60%, #2a5242 0%, transparent 40%);
+  background-size: 120% 120%;
+  animation: hero-shift 22s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora {
+    animation: none;
+  }
+}
