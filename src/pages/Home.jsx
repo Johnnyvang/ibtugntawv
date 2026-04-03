@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import DonorList from "../components/DonorList";
 import Reveal from "../components/Reveal";
 import ImageLightbox from "../components/ImageLightbox";
+import HeroBookSlideshow from "../components/HeroBookSlideshow";
 import CopyField from "../components/CopyField";
 import { getDonorsSorted } from "../lib/donors";
 
@@ -119,54 +120,60 @@ export default function Home() {
 
       <section className="relative overflow-hidden border-b border-forest-800">
         <div className="hero-aurora pointer-events-none absolute inset-0 opacity-[0.18]" />
-        <div className="relative mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
-          <motion.div
-            initial="hidden"
-            animate="show"
-            variants={{
-              hidden: {},
-              show: { transition: { staggerChildren: stagger, delayChildren: 0.05 } },
-            }}
-          >
-            <motion.p
-              variants={fadeUp}
-              className="mb-3 text-sm font-medium uppercase tracking-widest text-accent"
+        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+          <div className="md:grid md:grid-cols-[minmax(0,1fr)_minmax(260px,380px)] md:items-center md:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] lg:gap-12">
+            <motion.div
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: {},
+                show: { transition: { staggerChildren: stagger, delayChildren: 0.05 } },
+              }}
             >
-              Hmong Language and Literacy Committee
-            </motion.p>
-            <motion.h1
-              variants={fadeUp}
-              className="font-display text-4xl font-semibold leading-tight tracking-tight text-forest-50 sm:text-5xl md:text-6xl"
-            >
-              IB HAIV NEEG
-              <span className="block text-forest-100/95">IB TUG NTAWV</span>
-            </motion.h1>
-            <motion.p
-              variants={fadeUp}
-              className="mt-4 max-w-2xl text-lg text-forest-100/85 sm:text-xl"
-            >
-              One People, One Writing System — the first comprehensive Hmong writing guide since the
-              Romanized Popular Alphabet (RPA) in 1953.
-            </motion.p>
-            <motion.div variants={fadeUp} className="mt-10 flex flex-wrap gap-3">
-              <motion.a
-                href="#books"
-                whileHover={reduceMotion ? undefined : { scale: 1.02 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-                className="inline-flex items-center justify-center rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-forest-950 shadow-lg shadow-accent/25"
+              <motion.p
+                variants={fadeUp}
+                className="mb-3 text-sm font-medium uppercase tracking-widest text-accent"
               >
-                Explore the books
-              </motion.a>
-              <motion.a
-                href="#support"
-                whileHover={reduceMotion ? undefined : { scale: 1.02 }}
-                whileTap={reduceMotion ? undefined : { scale: 0.98 }}
-                className="inline-flex items-center justify-center rounded-xl border border-forest-700 bg-forest-900/50 px-5 py-3 text-sm font-medium text-forest-50 hover:border-accent/50 hover:bg-forest-800"
+                Hmong Language and Literacy Committee
+              </motion.p>
+              <motion.h1
+                variants={fadeUp}
+                className="font-display text-4xl font-semibold leading-tight tracking-tight text-forest-50 sm:text-5xl md:text-5xl lg:text-6xl"
               >
-                How to contribute
-              </motion.a>
+                IB HAIV NEEG
+                <span className="block text-forest-100/95">IB TUG NTAWV</span>
+              </motion.h1>
+              <motion.p
+                variants={fadeUp}
+                className="mt-4 max-w-2xl text-lg text-forest-100/85 sm:text-xl"
+              >
+                One People, One Writing System — the first comprehensive Hmong writing guide since the
+                Romanized Popular Alphabet (RPA) in 1953.
+              </motion.p>
+              <motion.div variants={fadeUp} className="mt-10 flex flex-wrap gap-3">
+                <motion.a
+                  href="#books"
+                  whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                  className="inline-flex items-center justify-center rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-forest-950 shadow-lg shadow-accent/25"
+                >
+                  Explore the books
+                </motion.a>
+                <motion.a
+                  href="#support"
+                  whileHover={reduceMotion ? undefined : { scale: 1.02 }}
+                  whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+                  className="inline-flex items-center justify-center rounded-xl border border-forest-700 bg-forest-900/50 px-5 py-3 text-sm font-medium text-forest-50 hover:border-accent/50 hover:bg-forest-800"
+                >
+                  How to contribute
+                </motion.a>
+              </motion.div>
             </motion.div>
-          </motion.div>
+
+            <div className="mt-12 hidden justify-center md:mt-0 md:flex">
+              <HeroBookSlideshow onOpen={(src, alt) => setLightbox({ src, alt })} />
+            </div>
+          </div>
         </div>
       </section>
 
