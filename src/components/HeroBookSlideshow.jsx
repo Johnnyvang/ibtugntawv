@@ -20,25 +20,27 @@ const SLIDES = [
 ];
 
 const INTERVAL_MS = 4800;
-const SLIDE_PX = 26;
 
-const slideTransition = {
-  duration: 0.32,
-  ease: [0.32, 0.72, 0, 1],
+/** Degrees — spine on the left, like turning a page */
+const OPEN = 78;
+
+const bookTransition = {
+  duration: 0.38,
+  ease: [0.34, 1.02, 0.35, 1],
 };
 
-const variants = {
+const bookVariants = {
   enter: (dir) => ({
-    x: dir * SLIDE_PX,
-    opacity: 0,
+    rotateY: dir * OPEN,
+    opacity: 0.88,
   }),
   center: {
-    x: 0,
+    rotateY: 0,
     opacity: 1,
   },
   exit: (dir) => ({
-    x: dir * -SLIDE_PX,
-    opacity: 0,
+    rotateY: dir * -OPEN,
+    opacity: 0.88,
   }),
 };
 
@@ -54,12 +56,11 @@ function SlideImageButton({ slide, fillColumn, onOpen }) {
     <button
       type="button"
       onClick={() => onOpen?.(slide.src, slide.alt)}
-      className={`group relative flex focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:ring-offset-1 focus-visible:ring-offset-forest-950 ${
-        fillColumn
-          ? "h-full max-h-full w-full items-center justify-center"
-          : "h-full w-full"
+      className={`group relative flex h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:ring-offset-1 focus-visible:ring-offset-forest-950 ${
+        fillColumn ? "items-center justify-center" : ""
       }`}
       aria-label={`Enlarge: ${slide.alt}`}
+      style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}
     >
       <img
         src={slide.src}
@@ -70,6 +71,7 @@ function SlideImageButton({ slide, fillColumn, onOpen }) {
             : "h-full w-full object-cover drop-shadow-[0_16px_48px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         }
         draggable={false}
+        style={{ backfaceVisibility: "hidden" }}
       />
       <span
         className={`pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-950/75 to-transparent text-center text-xs font-medium text-forest-100/90 opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
@@ -106,12 +108,12 @@ export default function HeroBookSlideshow({ onOpen, fillColumn = false }) {
   const slide = SLIDES[index];
 
   const shell = fillColumn
-    ? "flex h-full min-h-0 w-full flex-col"
-    : "flex w-full max-w-[min(100%,380px)] flex-col items-center justify-center lg:max-w-[420px]";
+    ? "flex h-full min-h-0 w-full flex-col overflow-x-clip"
+    : "flex w-full max-w-[min(100%,380px)] flex-col items-center justify-center overflow-x-clip lg:max-w-[420px]";
 
   const frame = fillColumn
-    ? "relative min-h-0 flex-1 overflow-hidden rounded-lg"
-    : "relative aspect-[3/4] w-full overflow-hidden rounded-lg";
+    ? "relative min-h-0 flex-1 overflow-visible rounded-lg px-1"
+    : "relative aspect-[3/4] w-full overflow-visible rounded-lg px-1";
 
   return (
     <div
@@ -120,41 +122,50 @@ export default function HeroBookSlideshow({ onOpen, fillColumn = false }) {
       onMouseLeave={() => setPaused(false)}
     >
       <div className={frame}>
-        <AnimatePresence mode="wait" initial={false} custom={direction}>
-          {reduceMotion ? (
-            <motion.div
-              key={slide.src}
-              className={
-                fillColumn
-                  ? "absolute inset-0 flex items-center justify-center"
-                  : "absolute inset-0"
-              }
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.12 }}
-            >
-              <SlideImageButton slide={slide} fillColumn={fillColumn} onOpen={onOpen} />
-            </motion.div>
-          ) : (
-            <motion.div
-              key={slide.src}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={slideTransition}
-              className={
-                fillColumn
-                  ? "absolute inset-0 flex items-center justify-center"
-                  : "absolute inset-0"
-              }
-            >
-              <SlideImageButton slide={slide} fillColumn={fillColumn} onOpen={onOpen} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div
+          className="absolute inset-0 flex items-center justify-center [perspective:min(1200px,140vw)]"
+          style={{ perspectiveOrigin: "left center" }}
+        >
+          <AnimatePresence mode="wait" initial={false} custom={direction}>
+            {reduceMotion ? (
+              <motion.div
+                key={slide.src}
+                className={
+                  fillColumn
+                    ? "absolute inset-0 flex items-center justify-center"
+                    : "absolute inset-0"
+                }
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.12 }}
+              >
+                <SlideImageButton slide={slide} fillColumn={fillColumn} onOpen={onOpen} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key={slide.src}
+                custom={direction}
+                variants={bookVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={bookTransition}
+                className={
+                  fillColumn
+                    ? "absolute inset-0 flex origin-left items-center justify-center"
+                    : "absolute inset-0 flex origin-left items-center justify-center"
+                }
+                style={{
+                  transformStyle: "preserve-3d",
+                  transformOrigin: "left center",
+                }}
+              >
+                <SlideImageButton slide={slide} fillColumn={fillColumn} onOpen={onOpen} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
 
       <div
