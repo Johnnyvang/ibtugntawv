@@ -3,19 +3,14 @@ import { motion } from "framer-motion";
 import CopyField from "./CopyField";
 
 const ZELLE_EMAIL = "dablaugzaj@gmail.com";
-const QR_PRIMARY = "/zelle.png";
-const QR_SECONDARY = "/zelle-qr.png";
+const ZELLE_QR = "/zelle.png";
 const QR_FALLBACK = "/zelle-qr-placeholder.svg";
 
 export default function ZelleSupportCard({ reduceMotion }) {
-  const [qrSrc, setQrSrc] = useState(QR_PRIMARY);
+  const [qrSrc, setQrSrc] = useState(ZELLE_QR);
 
   function handleQrError() {
-    setQrSrc((prev) => {
-      if (prev === QR_PRIMARY) return QR_SECONDARY;
-      if (prev === QR_SECONDARY) return QR_FALLBACK;
-      return prev;
-    });
+    setQrSrc((prev) => (prev === ZELLE_QR ? QR_FALLBACK : prev));
   }
 
   return (
