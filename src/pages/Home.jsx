@@ -121,7 +121,8 @@ export default function Home() {
       <section className="relative overflow-hidden border-b border-forest-800">
         <div className="hero-aurora pointer-events-none absolute inset-0 opacity-[0.18]" />
         <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
-          <div className="md:grid md:grid-cols-[minmax(0,1fr)_minmax(260px,380px)] md:items-center md:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)] lg:gap-12">
+          {/* Text sets hero height; slideshow is absolutely positioned to match that height (md+). */}
+          <div className="relative">
             <motion.div
               initial="hidden"
               animate="show"
@@ -129,6 +130,7 @@ export default function Home() {
                 hidden: {},
                 show: { transition: { staggerChildren: stagger, delayChildren: 0.05 } },
               }}
+              className="md:pr-[calc(min(260px,32vw)+2rem)]"
             >
               <motion.p
                 variants={fadeUp}
@@ -170,8 +172,11 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            <div className="mt-12 hidden justify-center md:mt-0 md:flex">
-              <HeroBookSlideshow onOpen={(src, alt) => setLightbox({ src, alt })} />
+            <div className="hidden md:absolute md:inset-y-0 md:right-0 md:flex md:min-w-0 md:w-[min(260px,32vw)]">
+              <HeroBookSlideshow
+                fillColumn
+                onOpen={(src, alt) => setLightbox({ src, alt })}
+              />
             </div>
           </div>
         </div>
