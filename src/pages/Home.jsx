@@ -5,7 +5,7 @@ import DonorList from "../components/DonorList";
 import Reveal from "../components/Reveal";
 import ImageLightbox from "../components/ImageLightbox";
 import HeroBookSlideshow from "../components/HeroBookSlideshow";
-import CopyField from "../components/CopyField";
+import ZelleSupportCard from "../components/ZelleSupportCard";
 import { getDonorsSorted } from "../lib/donors";
 
 const reasons = [
@@ -546,33 +546,35 @@ export default function Home() {
             Ways you can help cover printing costs and bring these books to more Hmong readers.
           </p>
         </Reveal>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="mt-8 flex flex-col gap-4">
           <Reveal delay={0.05}>
-            <CopyField label="Zelle" value="dablaugzaj@gmail.com" />
+            <ZelleSupportCard reduceMotion={reduceMotion} />
           </Reveal>
-          <Reveal delay={0.1}>
-            <motion.div
-              whileHover={reduceMotion ? undefined : { y: -2 }}
-              className="rounded-xl border border-forest-800 bg-forest-900/40 p-5 transition-colors hover:border-forest-700"
-            >
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-accent">MoneyGram</h3>
-              <p className="mt-2 text-forest-100/90">Chance V. Chang</p>
-            </motion.div>
-          </Reveal>
-          <Reveal delay={0.12} className="sm:col-span-2">
-            <motion.div
-              whileHover={reduceMotion ? undefined : { y: -2 }}
-              className="rounded-xl border border-forest-800 bg-forest-900/40 p-5 transition-colors hover:border-forest-700"
-            >
-              <h3 className="text-sm font-semibold uppercase tracking-wide text-accent">
-                Check or money order
-              </h3>
-              <p className="mt-2 text-forest-100/90">Payable to: Chance V. Chang</p>
-              <p className="mt-1 text-sm text-forest-100/70">
-                728 South Millard Ave, Fresno, CA 93727
-              </p>
-            </motion.div>
-          </Reveal>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Reveal delay={0.08}>
+              <motion.div
+                whileHover={reduceMotion ? undefined : { y: -2 }}
+                className="rounded-xl border border-forest-800 bg-forest-900/40 p-5 transition-colors hover:border-forest-700"
+              >
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-accent">MoneyGram</h3>
+                <p className="mt-2 text-forest-100/90">Chance V. Chang</p>
+              </motion.div>
+            </Reveal>
+            <Reveal delay={0.1} className="sm:col-span-2">
+              <motion.div
+                whileHover={reduceMotion ? undefined : { y: -2 }}
+                className="rounded-xl border border-forest-800 bg-forest-900/40 p-5 transition-colors hover:border-forest-700"
+              >
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-accent">
+                  Check or money order
+                </h3>
+                <p className="mt-2 text-forest-100/90">Payable to: Chance V. Chang</p>
+                <p className="mt-1 text-sm text-forest-100/70">
+                  728 South Millard Ave, Fresno, CA 93727
+                </p>
+              </motion.div>
+            </Reveal>
+          </div>
         </div>
         <Reveal delay={0.08}>
           <p className="mt-8 text-sm text-forest-100/65">

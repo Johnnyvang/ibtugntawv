@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" fill="none">
+  <rect width="256" height="256" fill="#fafafa" rx="12"/>
+  <rect x="24" y="24" width="64" height="64" fill="#1e3d30" rx="4"/>
+  <rect x="168" y="24" width="64" height="64" fill="#1e3d30" rx="4"/>
+  <rect x="24" y="168" width="64" height="64" fill="#1e3d30" rx="4"/>
+  <rect x="104" y="104" width="16" height="16" fill="#1e3d30"/>
+  <rect x="136" y="104" width="16" height="16" fill="#1e3d30"/>
+  <rect x="104" y="136" width="16" height="16" fill="#1e3d30"/>
+  <text x="128" y="228" text-anchor="middle" fill="#5a7a6a" font-family="system-ui,sans-serif" font-size="10">Add your QR as public/zelle-qr.png</text>
+</svg>
