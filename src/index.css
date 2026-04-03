@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --color-forest-950: #0f1f18;
+  --color-forest-900: #152a22;
+  --color-forest-800: #1e3d30;
+  --color-forest-700: #2a5242;
+  --color-forest-100: #e4f0ea;
+  --color-forest-50: #f4faf6;
+  --color-accent: #c9a227;
+  --color-accent-soft: #e8d48a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  @apply bg-forest-950 text-forest-100 antialiased;
+}
