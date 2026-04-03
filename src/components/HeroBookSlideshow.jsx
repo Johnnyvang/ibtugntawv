@@ -20,11 +20,11 @@ const SLIDES = [
 ];
 
 const INTERVAL_MS = 4800;
-const SLIDE_PX = 36;
+const SLIDE_PX = 26;
 
 const slideTransition = {
-  duration: 0.52,
-  ease: [0.22, 1, 0.36, 1],
+  duration: 0.32,
+  ease: [0.32, 0.72, 0, 1],
 };
 
 const variants = {
@@ -54,7 +54,7 @@ function SlideImageButton({ slide, fillColumn, onOpen }) {
     <button
       type="button"
       onClick={() => onOpen?.(slide.src, slide.alt)}
-      className={`group relative flex focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/80 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 ${
+      className={`group relative flex focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/35 focus-visible:ring-offset-1 focus-visible:ring-offset-forest-950 ${
         fillColumn
           ? "h-full max-h-full w-full items-center justify-center"
           : "h-full w-full"
@@ -66,8 +66,8 @@ function SlideImageButton({ slide, fillColumn, onOpen }) {
         alt=""
         className={
           fillColumn
-            ? "max-h-full max-w-full object-contain drop-shadow-[0_12px_40px_rgba(0,0,0,0.35)] transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-            : "h-full w-full object-cover drop-shadow-[0_12px_40px_rgba(0,0,0,0.35)] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+            ? "max-h-full max-w-full object-contain drop-shadow-[0_16px_48px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+            : "h-full w-full object-cover drop-shadow-[0_16px_48px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         }
         draggable={false}
       />
@@ -132,7 +132,7 @@ export default function HeroBookSlideshow({ onOpen, fillColumn = false }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.18 }}
+              transition={{ duration: 0.12 }}
             >
               <SlideImageButton slide={slide} fillColumn={fillColumn} onOpen={onOpen} />
             </motion.div>
